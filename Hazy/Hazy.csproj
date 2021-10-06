@@ -4,11 +4,10 @@
         <OutputType>Exe</OutputType>
         <TargetFramework>net5.0</TargetFramework>
     </PropertyGroup>
-    
+
     <ItemGroup>
-        <PackageReference Include="CommandLineParser" Version="2.8.0" />
-        <PackageReference Include="JsonLinesNet" Version="1.0.0" />
-        <PackageReference Include="RenderHaze" Version="1.0.0" />
+        <PackageReference Include="JsonLinesNet" Version="1.0.0"/>
+        <PackageReference Include="RenderHaze" Version="1.0.0"/>
     </ItemGroup>
 
 </Project>

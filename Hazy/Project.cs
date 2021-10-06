@@ -7,8 +7,8 @@ namespace Hazy
 	public class Project<TPixel> where TPixel : unmanaged, IPixel<TPixel>
 	{
 		public FileInfo[]         Media;
-		public Timeline<TPixel>[] Timelines;
 		public ProjectMeta        Meta;
+		public Timeline<TPixel>[] Timelines;
 
 		public Project(Timeline<TPixel>[] timelines, FileInfo[] media, ProjectMeta meta)
 		{
@@ -20,7 +20,7 @@ namespace Hazy
 
 	public class ProjectMeta
 	{
-		public string Name;
 		public float  Framerate;
+		public string Name;
 	}
 }

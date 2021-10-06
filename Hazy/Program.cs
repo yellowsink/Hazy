@@ -23,6 +23,7 @@ namespace Hazy
 				Console.WriteLine("Project load unsuccessful");
 				Environment.Exit(2);
 			}
+
 			Console.WriteLine(@$"Loaded project ""{proj.Meta.Name}"" @ {proj.Meta.Framerate} fps:
  - {proj.Timelines.Length} timelines
  - {proj.Timelines.Select(t => t.TimePoints.Length).Sum()} timing points
