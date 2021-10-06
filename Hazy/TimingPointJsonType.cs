@@ -6,10 +6,10 @@ namespace Hazy
 {
 	public class TimingPointJsonType
 	{
-		public HorizontalAlignment HAlign;
-		public float               Opacity;
+		public HorizontalAlignment HAlign  = HorizontalAlignment.Left;
+		public float               Opacity = 1;
 		public float               TimingMs;
-		public VerticalAlignment   VAlign;
+		public VerticalAlignment   VAlign = VerticalAlignment.Top;
 		public int                 X;
 		public int                 Y;
 

@@ -16,11 +16,16 @@ namespace Hazy
 			Timelines = timelines;
 			Meta      = meta;
 		}
+
+		public VideoRenderSupervisor<TPixel> RenderSupervisor
+			=> new(Timelines, Meta.Width, Meta.Height, Meta.Framerate);
 	}
 
 	public class ProjectMeta
 	{
 		public float  Framerate;
+		public uint   Height;
 		public string Name;
+		public uint   Width;
 	}
 }

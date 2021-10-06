@@ -21,7 +21,7 @@ namespace Hazy
 			catch (IOException) { return false; }
 		}
 
-		public static Timeline<TPixel> ParseTimelineFile<TPixel>(string contents, float framerate)
+		public static Timeline<TPixel> ParseTimelineFile<TPixel>(string contents, float framerate, string mediaRoot)
 			where TPixel : unmanaged, IPixel<TPixel>
 		{
 			var split    = contents.Split('\n', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
@@ -32,7 +32,7 @@ namespace Hazy
 
 			var rawTimingPoints = JsonLinesSerializer.Deserialize<TimingPointJsonType>(jsonl);
 
-			var img          = Image.Load<TPixel>(media);
+			var img          = Image.Load<TPixel>(Path.Combine(mediaRoot, media));
 			var timingPoints = rawTimingPoints.Select(t => t.ToTimePoint(framerate, img)).ToArray();
 
 			return new Timeline<TPixel>(new Object<TPixel>(img), endFrame, timingPoints);
@@ -51,7 +51,8 @@ namespace Hazy
 			var timelines = children.First(d => d.Name == "tls")
 									.EnumerateFiles()
 									.Select(f => ParseTimelineFile<TPixel>(File.ReadAllText(f.FullName),
-																		   meta.Framerate))
+																		   meta.Framerate,
+																		   Path.Combine(path, "res")))
 									.ToArray();
 
 			return new Project<TPixel>(timelines, media, meta);

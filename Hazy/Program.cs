@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using SixLabors.ImageSharp.PixelFormats;
@@ -9,18 +10,17 @@ namespace Hazy
 	{
 		private static void Main(string[] args)
 		{
-			if (args.Length == 0 || !Directory.Exists(args[0]))
+			if (args.Length < 2 || !Directory.Exists(args[0]))
 			{
 				Console.WriteLine("Please pass the path to a valid Hazy project");
 				Environment.Exit(1);
 			}
 
 			var projDir = args[0];
-			Console.WriteLine("Reading project...");
 			var success = ProjectProcessor.TryParse<Rgba32>(projDir, out var proj);
 			if (!success)
 			{
-				Console.WriteLine("Project load unsuccessful");
+				Console.WriteLine("Project was invalid, and failed to load");
 				Environment.Exit(2);
 			}
 
@@ -28,6 +28,14 @@ namespace Hazy
  - {proj.Timelines.Length} timelines
  - {proj.Timelines.Select(t => t.TimePoints.Length).Sum()} timing points
  - {proj.Media.Length} media items");
+
+			Console.WriteLine($"Starting render to: {args[1]}");
+			Directory.CreateDirectory(args[1]);
+			var renderer = proj.RenderSupervisor;
+			var sw       = Stopwatch.StartNew();
+			renderer.RenderVideoTo(args[1], null);
+			sw.Stop();
+			Console.WriteLine($"Render completed in {sw.Elapsed.TotalSeconds} seconds");
 		}
 	}
 }
