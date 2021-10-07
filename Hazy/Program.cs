@@ -9,6 +9,8 @@ namespace Hazy
 {
 	internal static class Program
 	{
+		private const string ClearLine = "\u001b[0K";
+	
 		private static void Main(string[] args)
 		{
 			if (args.Length < 2 || !Directory.Exists(args[0]))
@@ -38,10 +40,11 @@ namespace Hazy
 								   {
 									   Console.CursorLeft = 0;
 									   Console.Write(r.Type == RenderProgressType.Encoding
-														 ? "Encoding video..."
+														 ? ClearLine + "Encoding video..."
 														 : $"Rendering... {r.Completed}/{r.Total} ({100 * r.Completed / r.Total}%)");
 								   });
 			sw.Stop();
+			Console.CursorLeft = 0;
 			Console.WriteLine($"Render completed in {sw.Elapsed.TotalSeconds} seconds");
 		}
 	}

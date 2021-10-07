@@ -15,8 +15,7 @@ namespace Hazy
 
 		public TimePoint ToTimePoint(float framerate, Image img)
 		{
-			var frameTime = 1.0 / framerate;
-			var frameNum  = (ulong) (TimingMs / frameTime);
+			var frameNum  = (ulong) (framerate * TimingMs / 1000);
 
 			var x = HAlign switch
 			{
