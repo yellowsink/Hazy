@@ -33,7 +33,7 @@ namespace Hazy
 			var rawTimingPoints = JsonLinesSerializer.Deserialize<TimingPointJsonType>(jsonl);
 
 			var img          = Image.Load<TPixel>(Path.Combine(mediaRoot, media));
-			var timingPoints = rawTimingPoints.Select(t => t.ToTimePoint(framerate, img)).ToArray();
+			var timingPoints = rawTimingPoints.Select(t => t.ToTimePoint(framerate)).ToArray();
 
 			return new Timeline<TPixel>(new Object<TPixel>(img), endFrame, timingPoints);
 		}
