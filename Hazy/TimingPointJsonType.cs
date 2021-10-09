@@ -5,14 +5,14 @@ namespace Hazy
 {
 	public class TimingPointJsonType
 	{
-		public OriginPoint PosOrigin   = OriginPoint.TopLeft;
-		public OriginPoint ScaleOrigin = OriginPoint.TopLeft;
-		public float       Opacity     = 1;
-		public float       TimingMs;
-		public int         X;
-		public int         Y;
-		public float       Sx;
-		public float       Sy;
+		public OriginPoint PosOrigin   { get; set; } = OriginPoint.TopLeft;
+		public OriginPoint ScaleOrigin { get; set; } = OriginPoint.TopLeft;
+		public float       Opacity     { get; set; } = 1;
+		public float       TimingMs    { get; set; }
+		public int         X           { get; set; }
+		public int         Y           { get; set; }
+		public float       Sx          { get; set; } = 1;
+		public float       Sy          { get; set; } = 1;
 
 		public TimePoint ToTimePoint(float framerate)
 		{

@@ -23,9 +23,9 @@ namespace Hazy
 
 	public class ProjectMeta
 	{
-		public float  Framerate;
-		public uint   Height;
-		public string Name;
-		public uint   Width;
+		public float  Framerate { get; set; }
+		public uint   Height    { get; set; }
+		public string Name      { get; set; }
+		public uint   Width     { get; set; }
 	}
 }
