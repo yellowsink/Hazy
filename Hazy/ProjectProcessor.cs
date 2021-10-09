@@ -1,11 +1,10 @@
 using System;
 using System.IO;
 using System.Linq;
-using JsonLines;
+using System.Text.Json;
 using RenderHaze.VideoRenderer;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
-using Utf8Json;
 
 namespace Hazy
 {
@@ -28,10 +27,10 @@ namespace Hazy
 			var media    = split[0];
 			var endMs    = float.Parse(split[1]);
 			var endFrame = (ulong) (framerate * endMs / 1000);
-			var jsonl    = string.Join('\n', split[Range.StartAt(2)]);
 
-			var rawTimingPoints = JsonLinesSerializer.Deserialize<TimingPointJsonType>(jsonl);
-
+			var rawTimingPoints
+				= split[Range.StartAt(2)].Select(s => JsonSerializer.Deserialize<TimingPointJsonType>(s));
+			
 			var img          = Image.Load<TPixel>(Path.Combine(mediaRoot, media));
 			var timingPoints = rawTimingPoints.Select(t => t.ToTimePoint(framerate)).ToArray();
 
